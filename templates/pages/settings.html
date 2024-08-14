@@ -1,0 +1,68 @@
+{% extends "../layouts/base.html" %}
+
+{% block content %}
+<fieldset>
+  <legend>Identity Management</legend>
+
+  <br />
+  <div style="margin-bottom: 0.25rem; font-weight: bold;"><i class="fa-solid fa-user"></i> UUID</div>
+  <div style="display: flex; padding: 0.25rem 0.5rem; border: 1px solid #333; background-color: #2b2b2b;">
+    <input id="uuid" style="all: unset; flex: 1 0 0;" type="password" placeholder="UUID" autocomplete="off" disabled />
+    <button id="btn-copy" class="btn-view" style="margin-right: 0.5rem;"><i class="fa-solid fa-copy"></i></button>
+    <button id="btn-view" class="btn-view"><i class="fa-solid fa-eye"></i></button>
+  </div>
+  
+  <br />
+
+  <div style="margin-bottom: 0.25rem; font-weight: bold;"><i class="fa-solid fa-key-skeleton-left-right"></i> Public Key</div>
+  <textarea id="public-key" style="box-sizing: border-box; width: 100%; min-height: 8rem; resize: none;" disabled></textarea>
+
+  <br />
+  <br />
+
+  <div style="margin-bottom: 0.25rem; font-weight: bold;"><i class="fa-solid fa-key-skeleton"></i> Private Key</div>
+  <textarea id="private-key" style="box-sizing: border-box; width: 100%; min-height: 8rem; resize: none;" disabled></textarea>
+
+  <hr style="margin-top: 1rem;" />
+
+  <p>Pastes are associated with anonymous account numbers. Generating a new account number will prevent you from managing your old pastes.</p>
+  <button><i class="fa-solid fa-fingerprint"></i> Generate new identity</button>
+</fieldset>
+<hr style="margin-top: 1rem;" />
+
+<script type="module">
+  import { getUUID, getPublicKeyAsPEM, getPrivateKeyAsPEM } from '/lib/nanobin/storage.js';
+  const uuidElem = document.getElementById('uuid');
+  
+  document.getElementById('btn-view').addEventListener('mousedown', (evt) => {
+    uuidElem.setAttribute('type', 'text');
+  });
+
+  document.getElementById('btn-view').addEventListener('mouseleave', (evt) => {
+    uuidElem.setAttribute('type', 'password');
+  });
+
+  document.getElementById('btn-view').addEventListener('mouseup', (evt) => {
+    uuidElem.setAttribute('type', 'password');
+  });
+
+  document.getElementById('uuid').value = getUUID();
+  document.getElementById('public-key').value = getPublicKeyAsPEM();
+  document.getElementById('private-key').value = getPrivateKeyAsPEM();
+</script>
+
+<style>
+  .btn-view {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    opacity: 0.25;
+    transition: opacity 250ms ease;
+
+    &:hover {
+      background-color: transparent;
+      opacity: 1;
+    }
+  }
+</style>
+{% endblock %}

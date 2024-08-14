@@ -1,0 +1,17 @@
+# vscode settings directory
+.vscode/
+
+# cargo build output directory
+target/
+
+# sqlite3 database files
+res/*.db
+res/*.db3
+res/*.s3db
+res/*.sdb
+res/*.sl3
+res/*.sqlite
+res/*.sqlite3
+
+# environment variables file
+.env

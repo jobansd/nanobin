@@ -1,0 +1,16 @@
+[package]
+name = "nanobin"
+version = "0.1.0"
+author = "Joban"
+edition = "2021"
+
+[dependencies]
+askama = "0.12.1"
+axum = "0.7.5"
+chrono = "0.4.38"
+dotenvy = "0.15.7"
+nanoid = "0.4.0"
+serde = { version = "1.0.207", features = ["derive"] }
+sqlx = { version = "0.8.0", features = ["chrono", "sqlite", "runtime-tokio"] }
+tokio = { version = "1.39.2", features = ["rt-multi-thread"] }
+tower-http = { version = "0.5.2", features = ["fs"] }

@@ -1,0 +1,103 @@
+{% extends "../layouts/base.html" %}
+
+{% block content %}
+<h3>What is NanoBIN?</h3>
+<p>NanoBIN is a minimalist pastebin where the server has zero knowledge of pasted data. All data is asymmetrically encrypted/decrypted in the browser using RSA-OAEP.</p>
+<p>Pastes are associated with an ephemeral identity which can be regenerated in <u><a href="/settings">settings</a></u>.</p>
+
+<hr style="margin-bottom: 1rem;" />
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+  <h3 style="margin-bottom: 0.5rem;"><i class="fa-sharp fa-light fa-square-dashed-circle-plus"></i>&nbsp;New Paste</h3>
+  <div>
+    <i class="fa-solid fa-file-lock"></i>&nbsp;
+    <select name="paste_encryption">
+      <option selected>None</option>
+      <option>Personal Public Key</option>
+    </select>
+  </div>
+</div>
+<form hx-post="/api/paste" hx-trigger="submit">
+  <input id="paste-owner" name="paste_owner" type="hidden" />
+  <textarea id="paste-content" name="paste_content" style="box-sizing: border-box; width: 100%; height: 16rem;" placeholder="Paste your text here..." autocomplete="false" spellcheck="false"></textarea>
+  <div style="display: flex; flex-direction: column; row-gap: 0.5rem; margin-top: 0.5rem;">
+    <button class="btn-success" type="submit"><b>Create Paste</b></button>
+    <fieldset style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem;">
+      <div style="display: flex; align-items: center; width: 100%;">
+        <i class="fa-solid fa-trash-clock"></i>&nbsp;&nbsp;
+        <select name="paste_expiration" style="flex: 1 0 0; padding: 0.25rem;">
+          <option>Burn after reading</option>
+          <option>Never</option>
+          <option>10 Minutes</option>
+          <option>1 Hour</option>
+          <option>24 Hours</option>
+          <option>1 Week</option>
+          <option>1 Month</option>
+          <option>6 Months</option>
+          <option>1 Year</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; width: 100%;">
+        <i class="fa-solid fa-lock"></i>&nbsp;&nbsp;
+        <input name="paste_password" style="flex: 1 0 0; padding: 0.25rem;" type="password" placeholder="Password (recommended)" autocomplete="false" />
+      </div>
+    </fieldset>
+  </div>
+</form>
+
+<script type="module">
+  import { identity } from '/lib/nanobin/nanobin.js';
+
+  const pasteContent = document.getElementById('paste-content');
+  // const btnEnc = document.getElementById('btn-enc');
+  // const btnDec = document.getElementById('btn-dec');
+
+  // btnEnc.addEventListener('click', async (evt) => {
+  //   evt.preventDefault();
+  //   pasteContent.value = await identity.encrypt(pasteContent.value);
+  // });
+
+  // btnDec.addEventListener('click', async (evt) => {
+  //   evt.preventDefault();
+  //   pasteContent.value = await identity.decrypt(pasteContent.value);
+  // });
+
+  document.getElementById('paste-owner').value = localStorage.getItem('uuid');
+</script>
+
+<hr style="margin-top: 1rem;" />
+{% endblock %}
+
+<!-- <span style="display: flex; flex-direction: column; row-gap: 0.5rem; margin-top: 1rem;">
+  <span style="display: flex; justify-content: space-between;">
+    <button class="btn-success" type="submit"><b>Create Paste</b></button>
+    <span>
+      <button id="btn-enc" class="btn-info" type="button"><b>Encrypt</b></button>
+      <button id="btn-dec" class="btn-info" type="button"><b>Decrypt</b></button>
+    </span>
+  </span>
+  <span style="display: flex;">
+    <span style="margin-right: 1rem;">
+      <i class="fa-solid fa-trash-clock" style="margin-right: 0.5rem;"></i>
+      <select name="paste_expiration">
+        <option>Burn after reading</option>
+        <option>10 minutes</option>
+        <option>1 hour</option>
+        <option>1 day</option>
+      </select>
+    </span>
+    <span>
+      <i class="fa-solid fa-lock" style="margin-right: 0.5rem;"></i>
+      <input name="paste_password" style="padding: 0.25rem;" type="password" placeholder="Password (recommended)" autocomplete="false" />
+    </span>
+  </span>
+</span> -->
+
+<!-- <fieldset style="display: grid; row-gap: 0.5rem;">
+  <legend>Paste Settings</legend>
+  <div>
+    <i class="fa-solid fa-input-text"></i>
+    <input id="paste-title" name="paste_name" type="text" placeholder="Name" />
+  </div>
+</fieldset> -->

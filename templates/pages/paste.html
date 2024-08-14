@@ -1,0 +1,28 @@
+{% extends "../layouts/base.html" %}
+
+{% block content %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <span><i class="fa-regular fa-hashtag" style="margin-right: 0.5rem;"></i> {{- paste.id }}</span>
+    <span><i class="fa-regular fa-calendar" style="margin-right: 0.5rem;"></i> {{- paste.created_at }}</span>
+    <div>
+        <button>Raw</button>
+        <button id="btn-copy"><i class="fa-solid fa-copy"></i></button>
+        <button><i class="fa-solid fa-download"></i></button>
+    </div>
+</div>
+<hr style="margin-bottom: 1rem;" />
+<textarea id="paste-content" style="box-sizing: border-box; width: 100%; min-height: 16rem; height: fit-content; max-height: 100vh; resize: none;" disabled>
+    {{- paste.content }}
+</textarea>
+
+<script>
+    const pasteContent = document.getElementById('paste-content');
+    const btnCopy = document.getElementById('btn-copy');
+    
+    btnCopy.addEventListener('click', () => {
+        navigator.clipboard.writeText(pasteContent.textContent);
+    });
+</script>
+
+{% endblock %}

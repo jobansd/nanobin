@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Loom is a community-driven link aggregation platform" />
+  <meta name="theme-color" content="#fafaf9" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/styles/styles.css" />
+
+  <script src="/lib/vendors/htmx@2.0.0.js" integrity="sha256-VL6ouB77FEc95k8iMieZ3eD/RIcsY1gVtnTEnK00mhU="></script>
+  <script type="module" src="/lib/nanobin/nanobin.js"></script>
+
+  <title>NanoBIN</title>
+</head>
+
+<body>
+  {% include "partials/header.html" %}
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  {% include "partials/footer.html" %}
+</body>
+
+</html>
+
+<style>
+  #content {
+    padding: 1rem;
+  }
+</style>

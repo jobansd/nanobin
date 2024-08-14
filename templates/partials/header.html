@@ -1,0 +1,60 @@
+<header>
+    <div class="header-wrapper">
+      <span class="title-wrapper"><a href="/"><span style="vertical-align: text-top;">█</span> NANO<sup>BIN</sup></a> - ignorance is bliss</span>
+
+      <nav>
+        <ul>
+          <li><a id="archive-link" href="/archive">archive</a></li>
+          <li><a href="/settings">settings</a></li>
+        </ul>
+      </nav>
+
+      <!-- <nav>
+        <ul>
+          <li><a href="">API</a></li>
+          <li><a href="">TOOLS</a></li>
+          <li><a href="">FAQ</a></li>
+          <li>&mdash;</li>
+        </ul>
+      </nav>
+
+      <span style="text-align: right;">Login | Sign Up</span> -->
+    </div>
+  </header>
+
+  <script>
+    document.getElementById('archive-link').href = `/archive?id=${localStorage.getItem('uuid')}`;
+  </script>
+  
+  <style>
+    header {
+      border-bottom: 1px solid var(--clr-border);
+    }
+  
+    nav > ul {
+      padding: unset;
+      margin: unset;
+      list-style: none;
+  
+      li {
+        display: inline-block;
+      }
+    }
+  
+    .header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: var(--vw-max);
+      padding: 0.5rem 1rem;
+      margin: auto;
+    }
+  
+    .title-wrapper {
+      a {
+        font-weight: bold;
+        text-decoration: unset;
+      }
+    }
+  </style>
+  
